@@ -24,7 +24,7 @@ class Str
         return $this->string;
     }
 
-    public function implode($delimiter = " ")
+    public function toArray($delimiter = " ")
     {
         return explode($delimiter, $this->string);
     }
@@ -35,5 +35,5 @@ $str->toUpper();
 $str->toLower();
 
 echo $str->get();
-$array = $str->implode("l");
+$array = $str->toArray("l");
 echo "array<pre>" . print_r($array, 1) . "</pre>";
