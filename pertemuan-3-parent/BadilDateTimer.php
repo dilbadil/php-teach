@@ -14,6 +14,11 @@ class BadilDateTimer extends DateTime
         $this->format = "d M Y H:i:s";
     }
 
+    protected function adder($numbers, $type)
+    {
+        $this->add( DateInterval::createFromDateString($numbers . ' ' . $type) );
+    }
+
     /**
      * Add days to date.
      *
@@ -22,7 +27,7 @@ class BadilDateTimer extends DateTime
      */
     public function addDays($days = 1)
     {
-        $this->add( DateInterval::createFromDateString($days . ' days') );
+        $this->adder($days, 'days');
 
         return $this;
     }
@@ -31,14 +36,23 @@ class BadilDateTimer extends DateTime
      * Add hours to date.
      *
      * @param int $hours
+     * @param bool $delim
      * @return $this
      */
-    public function addHours($hours = 1)
+    public function addHours($hours = 1, $delim)
     {
-        $this->add( DateInterval::createFromDateString($hours. ' hours') );
+        $this->adder($hours, 'hours');
 
         return $this;
     }
+
+
+    /**
+     *  asdfksdfkds
+     * 
+     * @param
+     * @return
+     */
 
     /**
      * Add minutes to date.
@@ -48,7 +62,7 @@ class BadilDateTimer extends DateTime
      */
     public function addMinutes($minutes = 1)
     {
-        $this->add( DateInterval::createFromDateString($minutes. ' minutes') );
+        $this->adder($minutes, 'minutes');
 
         return $this;
     }
@@ -61,7 +75,7 @@ class BadilDateTimer extends DateTime
      */
     public function addMonths($months = 1)
     {
-        $this->add( DateInterval::createFromDateString($hours. ' months') );
+        $this->adder($months, 'months');
 
         return $this;
     }
@@ -74,7 +88,7 @@ class BadilDateTimer extends DateTime
      */
     public function addYears($years = 1)
     {
-        $this->add( DateInterval::createFromDateString($hours. ' years') );
+        $this->adder($years, 'years');
 
         return $this;
     }
@@ -87,7 +101,7 @@ class BadilDateTimer extends DateTime
      */
     public function addSeconds($seconds = 1)
     {
-        $this->add( DateInterval::createFromDateString($seconds. ' years') );
+        $this->adder($seconds, 'seconds');
 
         return $this;
     }
@@ -126,16 +140,9 @@ class BadilDateTimer extends DateTime
      */
     public function dayRangeWith($otherDate)
     {
-        if (! $otherDate instanceof BadilDateTimer)
-        {
-            if ($otherDate instanceof DateTime) $otherDate = $otherDate->format('Y-m-d H:i:s');
+        $hours = $this->hourRangeWith($otherDate);
 
-            $otherDate = new BadilDateTimer($otherDate);
-        }
-
-        $time = $otherDate->toTime() - $this->toTime();
-
-        return round($time / (3600 * 24));
+        return $hours / 24;
     }
 
 }
