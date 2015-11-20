@@ -1,0 +1,25 @@
+class UsersMySql
+class UsersPostgreSql
+class UsersMariaDb
+class UsersSqlLite
+
+interface UserRepository
+    public getAll
+
+database table users
+
+class UsersControllers {
+    construct(UserRepository $userRepo)
+
+    getAllUsers()
+    {
+        return $userRepo->getAll();
+    }
+}
+
+index.php
+require "vendor/autoload.php";
+
+    $db = new PostgreSql;
+    $controller = new UsersControllers($db)
+    pre => $controller->getAllUsers();
