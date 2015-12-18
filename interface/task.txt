@@ -20,6 +20,6 @@ class UsersControllers {
 index.php
 require "vendor/autoload.php";
 
-    $db = new PostgreSql;
+    $db = new UsersPostgreSql;
     $controller = new UsersControllers($db)
     pre => $controller->getAllUsers();
